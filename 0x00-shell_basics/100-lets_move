@@ -1,0 +1,2 @@
+#!/bin/bash
+cp -r [A-Z]* tmp/u
