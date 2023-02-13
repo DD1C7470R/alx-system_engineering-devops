@@ -1,2 +1,2 @@
 #!/bin/bash
-cat iacta.txt | grep "(as iacta alea est)"
+cat iacta | grep "(as iacta alea est)"
