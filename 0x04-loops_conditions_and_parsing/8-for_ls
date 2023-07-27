@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script is displaying "Best School" 10 times
+
+dir="$(ls)"
+
+for item in $dir;do
+	new_name=$(echo "$item" | cut -d '-' -f 2-)
+	echo "$new_name"
+done
+
