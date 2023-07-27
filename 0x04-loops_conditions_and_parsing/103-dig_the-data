@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#This script displays Best School 10 times using a while loop.
+
+file_path="apache-access.log"
+
+awk '{
+    # Extract the IP and HTTP status code from each log line
+    ip = $1
+    http_code = $9
+
+    # Group visitors by IP and HTTP status code and count the occurrences
+    count[ip, http_code]++
+}
+
+# At the end, print the grouped data in the specified format
+END {
+    for (key in count) {
+        split(key, keys, SUBSEP)
+        printf "%d %s %s\n", count[key], keys[1], keys[2]
+    }
+}' $file_path | sort -nr
+
