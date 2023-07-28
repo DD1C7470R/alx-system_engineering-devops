@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-#This script stops 4-to_infinity_and_beyond process.
+# Write a script that kills the process 7-highlander.
+kill -9 "$(pgrep -f 7-highlander)"
 
-
-script_name="7-highlander"
-pid=$(pgrep -f "$script_name")
-
-kill -9 -f "$pid"
 
