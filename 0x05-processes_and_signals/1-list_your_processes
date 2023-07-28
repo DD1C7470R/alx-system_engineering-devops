@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 #This script displays its own PID
 
-ps -axjf
+ps -auxf
 
