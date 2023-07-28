@@ -10,7 +10,7 @@ trap "echo I hate the kill command; exit" SIGTERM
 trap "echo Y U no love me?!" SIGINT
 trap "exit" SIGQUIT
 
-echo $$ > /var/run/holbertonscript.pid
+echo $$ > /var/run/mycript.pid
 
 while true
 do
