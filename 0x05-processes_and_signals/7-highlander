@@ -8,7 +8,6 @@
 
 function sigterm_handler() {
     echo "I am invincible!!!"
-    exit 0
 }
 trap 'sigterm_handler' SIGTERM
 
