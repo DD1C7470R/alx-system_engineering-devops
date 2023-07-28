@@ -5,7 +5,7 @@
 pids=$(pgrep -f bash)
 # Loop through the PIDs and display the PID along with the process name
 for pid in $pids; do
-    process_name=$(pstree $pid)
+    process_name=$(pstree "$pid")
     echo "$pid $process_name"
 done
 
