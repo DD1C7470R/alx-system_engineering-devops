@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#This script displays the PID, along with the process name,
+# of processes whose name contain the word bash
+
+# Replace "your_script_name.sh" with the name of the script you want to terminate
+script_name="4-to_infinity_and_beyond"
+
+# Find the PID of the running script using pgrep
+pid=$(pgrep -f "$script_name")
+
+# Check if the script is running
+if [ -n "$pid" ]; then
+    kill "$pid"
+fi
