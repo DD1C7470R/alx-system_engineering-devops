@@ -8,7 +8,7 @@
 # Function to start manage_my_process
 function start_process() {
     ./manage_my_process &
-    echo $! > /var/run/my_process.pid
+    echo $$ > /var/run/my_process.pid
     echo "manage_my_process started"
 }
 
@@ -19,9 +19,7 @@ function stop_process() {
         kill "$pid"
         rm -f /var/run/my_process.pid
         echo "manage_my_process stopped"
-    else
-        echo "manage_my_process is not running."
-    fi
+     fi
 }
 
 # Function to restart manage_my_process
