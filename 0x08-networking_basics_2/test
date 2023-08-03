@@ -1,0 +1,7 @@
+127.0.0.1	localho
+::1	localho
+fe00::0	ip6-localnet
+ff00::0	ip6-mca
+ff02::1	ip6-allnode
+ff02::2	ip6-allrouter
+172.17.0.6	930784ad7005
