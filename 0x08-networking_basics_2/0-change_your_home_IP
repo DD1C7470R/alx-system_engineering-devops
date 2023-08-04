@@ -9,8 +9,9 @@ cp /etc/hosts $file
 
 a=1
 b=2
-sed -i 's/127.0.0.1/127.0.0.2/' "$file"
-#sed -i -e "${a}\\n127.0.0.2\t127.0.0.1" $file
+#sed -i 's/127.0.0.1/127.0.0.2/' "$file"
+sed -i -e "${a}a\\
+127.0.0.2\tlocalhost" "$file"
 
 sed -i -e "${b}a\\
 8.8.8.8\tfacebook.com" "$file"
