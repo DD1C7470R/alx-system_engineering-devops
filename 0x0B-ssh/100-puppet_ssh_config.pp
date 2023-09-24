@@ -1,9 +1,9 @@
 # Set up server configuration with puppet
 file { '/root/.ssh/config':
   ensure => present,
-  content => "Host example-server\n
-              HostName your_server_hostname\n
-              User your_ssh_username\n
+  content => "Host 18.235.248.71\n
+              HostName 18.235.248.71\n
+              User ubuntu\n
               IdentityFile ~/.ssh/school\n
               PasswordAuthentication no\n",
   owner => 'root',
