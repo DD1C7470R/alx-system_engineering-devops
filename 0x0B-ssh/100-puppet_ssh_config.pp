@@ -1,5 +1,5 @@
 # Set up server configuration with puppet
-file { '/root/.ssh/config':
+file { '~/.ssh/config':
   ensure => present,
   content => "Host 18.235.248.71\n
               HostName 18.235.248.71\n
