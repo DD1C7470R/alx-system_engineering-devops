@@ -6,8 +6,5 @@ file { '~/.ssh/config':
               User ubuntu\n
               IdentityFile ~/.ssh/school\n
               PasswordAuthentication no\n",
-  owner => 'root',
-  group => 'root',
-  mode => '0600',
 }
 
