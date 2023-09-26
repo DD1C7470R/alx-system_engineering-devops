@@ -11,16 +11,13 @@ sudo ufw allow 'Nginx HTTP'
 
 
 # Check if NGINX is already configured
-if grep -q "Hello World!" /var/www/html/index.nginx-debian.html; then
-	echo "NGINX is already configured to serve Hello World!"
-else
-	sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
-	pid=$(pgrep nginx | head -n 1)
 
-    	if [ -z "$pid" ]; then
-		sudo service nginx start
-	else
-		sudo kill -HUP "$pid"
-	fi
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
+pid=$(pgrep nginx | head -n 1)
+
+if [ -z "$pid" ]; then
+	sudo service nginx start
+else
+	sudo kill -HUP "$pid"
 fi
 
