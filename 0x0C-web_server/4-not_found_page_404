@@ -1,7 +1,5 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 #a script for 404
-
-#!/bin/bash
 
 # Install NGINX
 sudo apt-get update
