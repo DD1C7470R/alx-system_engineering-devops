@@ -2,7 +2,7 @@
 # Configure your Nginx server so that /redirect_me is redirecting to another page.
 
 
-str_repl="server_name _;\n\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}"
+str_repl="server_name _;\n\n\tlocation /redirect_me {\n\t\treturn 301 http://dev-israel.tech;\n\t}"
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
