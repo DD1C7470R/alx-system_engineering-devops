@@ -23,5 +23,6 @@ if grep -q "Hello World!" /var/www/html/index.nginx-debian.html; then
 else
     echo "Configuring NGINX to serve Hello World..."
     echo "Hello World!" > /var/www/html/index.nginx-debian.html 
+    sudo service nginx start
 fi
 
