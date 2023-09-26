@@ -1,4 +1,5 @@
 #!/bin/bash
+#a script for 404
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
