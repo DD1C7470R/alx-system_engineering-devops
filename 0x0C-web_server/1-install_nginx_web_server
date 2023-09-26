@@ -4,14 +4,6 @@
 # Update the package list and install NGINX
 sudo apt-get update
 sudo apt-get install -y nginx
-sudo ufw allow 'Nginx HTTP'
 
 sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
-pid=$(pgrep nginx | head -n 1)
-
-if [ -z "$pid" ]; then
-	sudo service nginx start
-else
-	sudo kill -HUP "$pid"
-fi
-
+sudo service nginx start
