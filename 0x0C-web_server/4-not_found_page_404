@@ -14,22 +14,30 @@ EOL
 # Configure NGINX for custom 404 page
 sudo tee /etc/nginx/sites-available/default <<EOL
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+        listen 80 default_server;
+        listen [::]:80 default_server;
 
-    root /var/www/html;
-    index index.html index.htm;
+        root /var/www/html;
 
-    server_name _;
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
 
-    location / {
-        try_files $uri $uri/ =404;
-    }
+        server_name _;
 
-    error_page 404 /custom_404.html;
-    location = /custom_404.html {
-        internal;
-    }
+        location /redirect_me {
+                return 301 http://dev-israel.tech;
+        }
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ /custom_404.html;
+        }
+
+        location = /custom_404.html {
+                internal;
+                root /var/www/html;
+        }
 }
 EOL
 
