@@ -1,11 +1,39 @@
-#!/bin/bash
+#!/bin/env bash
 #a script for 404
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
+#!/bin/bash
 
-mystr="@oui_oui_baguette;\n\t}\n\n\tlocation @oui_oui_baguette {\n\t\tdefault_type text/html;\n\t\treturn 404 \"Ceci n\'est pas une page\";"
+# Install NGINX
+sudo apt-get update
+sudo apt-get install -y nginx
 
-sudo sed -i -z "s|"=404;"|$mystr|" /etc/nginx/sites-enabled/default
+# Create the custom 404 page
+sudo mkdir -p /var/www/html
+sudo tee /var/www/html/custom_404.html <<EOL
+Ceci n'est pas une page
+EOL
 
-sudo service nginx restart
+# Configure NGINX for custom 404 page
+sudo tee /etc/nginx/sites-available/default <<EOL
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+        internal;
+    }
+}
+EOL
+
+# Test NGINX configuration and reload
+sudo service nginx start
