@@ -9,21 +9,21 @@ sudo ufw allow 'Nginx HTTP'
 # Allow HTTP traffic through the firewall
 sudo ufw allow 'Nginx HTTP'
 
-# Check if NGINX is running
-if pgrep nginx &>/dev/null; then
-    echo "NGINX is already running."
-else
-    echo "NGINX is not running. Starting NGINX..."
-    sudo service nginx start
-fi
 
 # Check if NGINX is already configured
 if grep -q "Hello World!" /var/www/html/index.nginx-debian.html; then
-    echo "NGINX is already configured to serve Hello World!"
+	echo "NGINX is already configured to serve Hello World!"
 else
-    echo "Configuring NGINX to serve Hello World..."
-    echo "Hello World!" > /var/www/html/index.nginx-debian.html 
-    pid=$(pgrep nginx | head -n 1)
-    sudo kill -HUP "$pid"
+	echo "Configuring NGINX to serve Hello World..."
+	sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html'
+	pid=$(pgrep nginx | head -n 1)
+
+    	if [ -z "$pid" ]; then
+    		echo "NGINX is not running. Starting NGINX..."
+		sudo service nginx start
+	else
+		echo "Reloading NGINX configuration..."
+		sudo kill -HUP "$pid"
+	fi
 fi
 
