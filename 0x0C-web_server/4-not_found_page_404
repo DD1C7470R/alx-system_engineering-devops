@@ -1,4 +1,4 @@
-§#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Install nginx on my web01 server
 # Configure nginx server to have a custom 404 page that contains
 # "Ceci n'est pas une page"
