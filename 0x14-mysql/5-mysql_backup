@@ -14,4 +14,3 @@ tar -zcvf "$current_date.tar.gz" backup.sql
 rm backup.sql
 
 # Provide success message
-echo "MySQL backup and compression completed successfully."
