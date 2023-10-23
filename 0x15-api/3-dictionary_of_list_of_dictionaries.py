@@ -23,7 +23,6 @@ if __name__ == '__main__':
             todo_dict = {}
             todo_dict.update(
                     {
-                        "user_ID": user.get('id'),
                         "username": name_result.get("username"),
                         "completed": todo.get("completed"),
                         "task": todo.get("title")
