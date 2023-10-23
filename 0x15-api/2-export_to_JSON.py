@@ -5,6 +5,7 @@ from json import dump
 from requests import get
 from sys import argv
 
+
 if __name__ == '__main__':
     main_url = 'https://jsonplaceholder.typicode.com'
     todo_url = main_url + f"/user/{argv[1]}/todos"
@@ -19,5 +20,5 @@ if __name__ == '__main__':
             "username"), "completed": todo.get("completed"),
                           "task": todo.get("title")})
         todo_list.append(todo_dict)
-    with open(f"{argv[1]}.json"), 'w') as f:
+    with open(f"{argv[1]}.json", 'w') as f:
         dump({argv[1]: todo_list}, f)
