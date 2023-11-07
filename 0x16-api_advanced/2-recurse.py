@@ -7,7 +7,7 @@ def recurse(subreddit, after=None):
     """Prints the titles of the 10 hottest posts on a given subreddit."""
 
     if subreddit is None:
-        print("None")
+        return None
         return
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
@@ -24,8 +24,7 @@ def recurse(subreddit, after=None):
             allow_redirects=False
     )
     if response.status_code == 404:
-        print("None")
-        return
+        return None
     results = response.json().get("data")
     after = results.get("after")
     [print(c.get("data").get("title")) for c in results.get("children")]
