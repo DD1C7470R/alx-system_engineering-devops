@@ -8,7 +8,6 @@ def recurse(subreddit, after=None):
 
     if subreddit is None:
         return None
-        return
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
             "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
