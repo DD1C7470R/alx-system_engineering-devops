@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #Reload gunicorn gracefully
 
 GUNICORN_PID_FILE="/home/ubuntu/AirBnB_clone_v4/gunicorn.pid"
