@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+GUNICORN_PID_FILE="/home/ubuntu/AirBnB_clone_v4/gunicorn.pid"
+
+if [ -f "$GUNICORN_PID_FILE" ]; then
+    PID=$(cat "$GUNICORN_PID_FILE")
+
+    kill -HUP "$PID"
+fi
+
