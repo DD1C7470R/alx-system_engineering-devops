@@ -1,0 +1,110 @@
+# this specifies that there is a WSGI server running on port 8000
+upstream app_server_djangoapp {
+        server localhost:5000 fail_timeout=0;
+}
+
+# Define the upstream Gunicorn server
+upstream gunicorn_dynamic {
+    server 127.0.0.1:5001;
+}
+# Define the upstream Gunicorn server
+upstream gunicorn_api {
+    server 127.0.0.1:5002;
+}
+upstream dynamic_web {
+    server 127.0.0.1:5003;
+}
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        server_name 18.235.248.71;
+
+        #root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+        #location / {
+        #       root /var/www/html;
+                # First attempt to serve request as file, then
+        #       add_header X-Served-By 259231-web-01;   
+                # as directory, then fall back to displaying a 404.
+        #       try_files $uri $uri/ =404; 
+        #} 
+
+        error_page 404 /404error.html;
+        location = /404error.html {
+                root /usr/share/nginx/html;
+                internal;
+                add_header X-Served-By 259231-web-01;
+        }
+
+
+        location /redirect_me {
+                return 301 http://dev-israel.tech;
+                add_header X-Served-By 259231-web-01;
+        }
+
+
+        location /hbnb_static {
+                alias /data/web_static/current;
+        }
+        location /airbnb-onepage/ {
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+
+                if (!-f $request_filename) {
+                        proxy_pass http://app_server_djangoapp;
+                        break;
+                }
+        }
+
+# Server block for the /airbnb-dynamic/number_odd_or_even/(any integer) route
+    location ~ ^/airbnb-dynamic/number_odd_or_even/(\d+)$ {
+        rewrite ^/airbnb-dynamic/number_odd_or_even/(\d+)$ /number_odd_or_even/$1 last;
+        # this specifies that there is a WSGI server running on port 8000
+    }
+# Server block for the /number_odd_or_even/(any integer) route
+        location ~ ^/number_odd_or_even/(\d+)$ {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            if (!-f $request_filename) {
+                proxy_pass http://gunicorn_dynamic;
+                break;
+            }
+        }
+
+        location /api/ {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            if (!-f $request_filename) {
+                proxy_pass http://gunicorn_api;
+                break;
+            }
+        }
+
+        #location / {
+        #       rewrite ^/$ /2-hbnb break;
+        # this specifies that there is a WSGI server running on port 8000
+        #}
+
+        location / {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            proxy_pass http://dynamic_web/2-hbnb;
+
+        }
+        location /static {
+         #      autoindex on;
+                alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static;
+        }
+}
