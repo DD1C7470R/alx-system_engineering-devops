@@ -1,3 +1,17 @@
 #!/usr/bin/env bash
 #Reload gunicorn gracefully
-systemctl status gunicorn | grep -oE 'Main PID: [0-9]+' | cut -d ' ' -f3 | xargs kill -HUP
+#systemctl status gunicorn | grep -oE 'Main PID: [0-9]+' | cut -d ' ' -f3 | xargs kill -HUP
+# Use pgrep to find the PID of the Gunicorn process
+GUNICORN_PIDS=$(pgrep -f "gunicorn.*web_dynamic.2-hbnb:app")
+
+# Check if the Gunicorn process is running
+# Use pgrep to find the PIDs of the Gunicorn processes
+
+# Check if any Gunicorn processes are running
+if [ -n "$GUNICORN_PIDS" ]; then
+    # Loop through each PID and send a HUP signal
+    for PID in $GUNICORN_PIDS; do
+        kill -HUP "$PID"
+    done
+
+fi
