@@ -3,7 +3,7 @@
 Uses the JSON placeholder api to query data about an employee
 """
 
-from requests import get
+from security.safe_requests import get
 from sys import argv
 
 if __name__ == '__main__':
