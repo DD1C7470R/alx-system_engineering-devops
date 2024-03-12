@@ -2,7 +2,7 @@
 """fetches information from JSONplaceholder API and exports to JSON"""
 
 from json import dump
-from requests import get
+from security.safe_requests import get
 from sys import argv
 
 

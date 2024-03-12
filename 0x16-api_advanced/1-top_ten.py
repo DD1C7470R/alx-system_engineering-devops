@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Function to print hot posts on a given Reddit subreddit."""
-import requests
+from security import safe_requests
 
 
 def top_ten(subreddit):
@@ -16,7 +16,7 @@ def top_ten(subreddit):
     params = {
         "limit": 10
     }
-    response = requests.get(url, headers=headers, params={"limit": 10},
+    response = safe_requests.get(url, headers=headers, params={"limit": 10},
                             allow_redirects=False)
     if response.status_code == 404:
         print("None")
