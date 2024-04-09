@@ -3,8 +3,9 @@
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None):
+def recurse(subreddit, hot_list=None, after=None):
     """Prints the titles of the 10 hottest posts on a given subreddit."""
+    hot_list = [] if hot_list is None else hot_list
 
     if subreddit is None:
         return hot_list
