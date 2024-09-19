@@ -4,6 +4,7 @@
 from json import dump
 from requests import get
 from sys import argv
+from security import safe_requests
 
 
 if __name__ == '__main__':
@@ -15,8 +16,8 @@ if __name__ == '__main__':
         todo_list = []
         todo_url = main_url + f"/user/{user.get('id')}/todos"
         name_url = main_url + f"/users/{user.get('id')}"
-        todo_result = get(todo_url).json()
-        name_result = get(name_url).json()
+        todo_result = safe_requests.get(todo_url).json()
+        name_result = safe_requests.get(name_url).json()
 
         todo_list = []
         for todo in todo_result:

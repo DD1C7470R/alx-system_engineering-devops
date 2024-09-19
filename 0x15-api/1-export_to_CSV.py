@@ -4,15 +4,15 @@ Uses the JSON placeholder api to query data about an employee
 """
 
 from csv import DictWriter, QUOTE_ALL
-from requests import get
 from sys import argv
+from security import safe_requests
 
 if __name__ == '__main__':
     main_url = 'https://jsonplaceholder.typicode.com'
     todo_url = main_url + f"/user/{argv[1]}/todos"
     name_url = main_url + f"/users/{argv[1]}"
-    todo_result = get(todo_url).json()
-    name_result = get(name_url).json()
+    todo_result = safe_requests.get(todo_url).json()
+    name_result = safe_requests.get(name_url).json()
 
     todo_list = []
     for todo in todo_result:

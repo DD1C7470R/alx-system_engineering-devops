@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Function to print hot posts on a given Reddit subreddit."""
-import requests
+from security import safe_requests
 
 
 def recurse(subreddit, hot_list=[], after=None):
@@ -18,7 +18,7 @@ def recurse(subreddit, hot_list=[], after=None):
         "after": after
     }
 
-    response = requests.get(
+    response = safe_requests.get(
             url, headers=headers, params=params,
             allow_redirects=False
     )
