@@ -8,15 +8,15 @@ from sys import argv
 
 if __name__ == '__main__':
     main_url = 'https://jsonplaceholder.typicode.com'
-    users_result = get(main_url + '/users').json()
+    users_result = get(main_url + '/users', timeout=60).json()
 
     employees_data = {}
     for user in users_result:
         todo_list = []
         todo_url = main_url + f"/user/{user.get('id')}/todos"
         name_url = main_url + f"/users/{user.get('id')}"
-        todo_result = get(todo_url).json()
-        name_result = get(name_url).json()
+        todo_result = get(todo_url, timeout=60).json()
+        name_result = get(name_url, timeout=60).json()
 
         todo_list = []
         for todo in todo_result:
